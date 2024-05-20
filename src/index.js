@@ -5,7 +5,7 @@ import './style/carousel.css';
 
 import { showSidebar, hideSidebar } from './modules/dropdown-menu.js';
 import createImageCarousel from './modules/carousel-dom.js';
-import { fillCircle } from './modules/carousel-functions.js';
+import { fillCircle, showNextImage } from './modules/carousel-functions.js';
 
 const openSidebar = document.querySelector('#open-sidebar');
 const closeSidebar = document.querySelector('#close-sidebar');
@@ -15,9 +15,11 @@ openSidebar.onclick = () => showSidebar(sidebar);
 closeSidebar.onclick = () => hideSidebar(sidebar);
 
 hideSidebar(sidebar);
-
-document
-  .querySelector('main')
-  .appendChild(createImageCarousel(['blue', 'red', 'yellow']));
+const colors = ['blue', 'red', 'yellow'];
+document.querySelector('main').appendChild(createImageCarousel(colors));
 
 fillCircle();
+setInterval(() => {
+  showNextImage((colors.length - 1) * 600);
+  fillCircle();
+}, 5000);
